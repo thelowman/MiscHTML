@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Web Page</title>
+  <title>Plain Ol' Page</title>
   <script src="js/inline-edit.js" type="module"></script>
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .visible-container {
+      padding-top: 2em;
+      padding-bottom: 2em;
+      background-color: #ffe5e9;
+      border: 1px dashed #a7a6a6;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    input {
+      padding: 5px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to My Web Page</h1>
-  <p>This is a basic HTML page.</p>
-  <div>
-    <input type="text" is="inline-edit" value="Click me to edit" />
+  <div class="container">
+    <div class="visible-container">
+      <div>
+        <input type="text" is="inline-edit" value="Click me to edit" data-action="/simApi/inlineEdit-failure.json" />
+      </div>
+    </div>
   </div>
 </body>
 </html>
