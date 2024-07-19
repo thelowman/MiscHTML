@@ -15,8 +15,6 @@ class TwoSwirls extends HTMLElement {
           position: absolute;
           width: 80%;
           height: 80%;
-          left: 10%;
-          top: 10%;
           border-radius: 50%;
           border-style: solid solid solid none;
           border-top-color: transparent;
@@ -27,8 +25,6 @@ class TwoSwirls extends HTMLElement {
           position: absolute;
           width: 90%;
           height: 90%;
-          left: 5%;
-          top: 5%;
           border-radius: 50%;
           border-style: solid solid solid none;
           border-bottom-color: transparent;
@@ -83,6 +79,10 @@ class TwoSwirls extends HTMLElement {
       this.shadowRoot.querySelector('.container').style.height = this.size;
       this.shadowRoot.querySelector('.inner').style.borderWidth = 'calc(' + this.size + ' / ' + this.borderDivisor + ')';
       this.shadowRoot.querySelector('.outer').style.borderWidth = 'calc(' + this.size + ' / ' + this.borderDivisor + ')';
+      this.shadowRoot.querySelector('.inner').style.top = 'calc(5% - (' + this.size + ' / 10))';
+      this.shadowRoot.querySelector('.inner').style.left = 'calc(5% - (' + this.size + ' / 10))';
+      this.shadowRoot.querySelector('.outer').style.top = 'calc(5% - (' + this.size + ' / 10))';
+      this.shadowRoot.querySelector('.outer').style.left = 'calc(5% - (' + this.size + ' / 10))';
     }
   }
 }

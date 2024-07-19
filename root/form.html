@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plain Ol' Page</title>
+  <link rel="stylesheet" href="/css/site.css">
+  <script src="/js/please-wait.js" type="module"></script>
+</head>
+<body>
+  <h1>This here is a form</h1>
+  <main>
+    <form action="/api/noop" method="post">
+      <table>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>Something something</td>
+          <td>
+            <please-wait></please-wait>
+          </td>
+        </tr>
+      </table>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </main>
+  <script type="module">
+    document.querySelector('form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const response = fetch(event.target.action, {
+        method: event.target.method,
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        feedback();
+      })
+      .catch(error => console.error(error));
+    });
+
+    function feedback() {
+      const pleaseWait = document.querySelector('please-wait');
+
+      pleaseWait.setAttribute('status', 'pending');
+      pleaseWait.innerHTML = 'Please wait...';
+      
+      const poll = () => fetch('/api/poll', {
+        method: 'GET'
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        pleaseWait.setAttribute('status', data.status);
+        if (data.status !== 'pending') {
+          clearInterval(interval);
+        }
+      })
+      .catch(error => console.error(error));
+
+      const interval = setInterval(() => {
+        poll();
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
